@@ -23,14 +23,15 @@
   </head>
   <body>
     <div id="root">
-      <div id="app" class="debug">
+      <div id="app" class="row">
         <!-- Contacts -->
-        <div id="contacts" class="">
+        <div id="side" class="col-3 p-0">
           <!-- User name -->
           <div class="username d-flex justify-content-between">
             <div class="d-flex align-items-center">
-              <img src="/img/avatar_1.jpg" alt="" />
-              <div class="h5 ms-3">Salvatore</div>
+              <img :src="'img/avatar' + user.avatar + '.jpg'" alt="" />
+
+              <div class="h5 ms-2">{{user.name}}</div>
             </div>
             <div class="user-icons d-flex">
               <i class="fa-solid fa-circle-notch mx-2"></i>
@@ -47,59 +48,95 @@
             </div>
           </div>
           <!-- Contacts -->
+          <!-- Search bar -->
+          <div
+            class="search-bar d-flex align-items-center justify-content-center"
+          >
+            <div class="input-group m-3">
+              <span class="input-group-text"
+                ><i class="fa-solid fa-magnifying-glass"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Cerca o inizia una nuova chat"
+              />
+            </div>
+          </div>
           <div class="contacts">
-            <!-- Search bar -->
-            <div
-              class="search-bar d-flex align-items-center justify-content-center"
-            >
-              <div class="input-group m-3">
-                <span class="input-group-text"
-                  ><i class="fa-solid fa-magnifying-glass"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Cerca o inizia una nuova chat"
-                />
-              </div>
-            </div>
             <!-- Contact -->
-            <div class="contact">
-              <img src="/img/avatar_2.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Michele</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_3.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Fabio</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_4.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Samuele</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_5.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Bruno</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_5.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Bruno</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_5.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Bruno</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_5.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Bruno</div>
-            </div>
-            <div class="contact">
-              <img src="/img/avatar_5.jpg" alt="" />
-              <div class="contact-name h5 ms-3">Bruno</div>
+            <div v-for="contact in contacts" class="contact">
+              <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="" />
+              <div class="contact-name h5 ms-3">{{contact.name}}</div>
             </div>
           </div>
         </div>
         <!-- Chat -->
-        <div id="chat" class=""></div>
+        <div id="main" class="col-9">
+          <!-- Contact info -->
+          <div class="chat-header d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <img src="/img/avatar_2.jpg" alt="" />
+              <div class="ms-2">
+                <div class="h5 text-dark m-0">Michele</div>
+                <p class="m-0">Ultimo accesso oggi alle</p>
+              </div>
+            </div>
+            <!-- Icons -->
+            <div>
+              <i class="fa-solid fa-magnifying-glass mx-2"></i>
+              <i class="fa-solid fa-paperclip mx-2"></i>
+              <i class="fa-solid fa-ellipsis-vertical mx-2"></i>
+            </div>
+          </div>
+          <!-- Chat -->
+          <div class="chat">
+            <div class="message user-msg">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Corporis vero sunt nostrum esse corrupti ut blanditiis, repellat
+                possimus obcaecati doloribus laudantium error quos laboriosam
+                sapiente, voluptatem, fugiat numquam dolore accusantium.
+              </p>
+              <p class="date">10/01/2022 13:55:20</p>
+            </div>
+            <div class="message contact-msg">
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius,
+                vel?
+              </p>
+              <p class="date">10/01/2022 13:55:20</p>
+            </div>
+            <div class="message user-msg">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="date">10/01/2022 13:55:20</p>
+            </div>
+            <div class="message user-msg">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="date">10/01/2022 13:55:20</p>
+            </div>
+            <div class="message contact-msg">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Corporis vero sunt nostrum esse corrupti ut blanditiis, repellat
+                possimus obcaecati doloribus laudantium error quos laboriosam
+                sapiente, voluptatem, fugiat numquam dolore accusantium.
+              </p>
+              <p class="date">10/01/2022 13:55:20</p>
+            </div>
+          </div>
+          <!-- Message input -->
+          <div class="chat-footer d-flex align-items-center">
+            <i class="fa-regular fa-smile mx-4"></i>
+
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Scrivi un messaggio"
+            />
+            <i class="fa-solid fa-microphone mx-4"></i>
+          </div>
+        </div>
       </div>
     </div>
     <!-- JS -->

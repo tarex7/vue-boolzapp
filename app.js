@@ -1,14 +1,15 @@
 const data = {
-    user: {
-      name: 'Nome Utente',
-      avatar: '_io'
-    },
+   
     
 }
 
 const app = new Vue({
     el: "#root",
-    data: {
+  data: {
+    user: {
+      name: 'Salvatore',
+      avatar: '_io'
+    },
         contacts: [
             {
               name: 'Michele',
@@ -24,7 +25,7 @@ const app = new Vue({
             },
             {
               name: 'Luisa',
-              avatar: '_4',
+              avatar: '_6',
             },
           ]
     }
