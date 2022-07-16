@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100vh;
 }
 
 .debug {
@@ -23,9 +24,11 @@
 }
 
 #contacts {
-  height: 100%;
+  max-height: 100%;
   width: calc(100% / 2);
   background-color: #eaeaea;
+  display: flex;
+  flex-direction: column;
 }
 
 #chat {
@@ -44,32 +47,39 @@
 .fa-bell-slash {
   border-radius: 50%;
   background-color: #fff;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
   text-align: center;
   font-size: 1.3rem;
   color: #8edafc;
 }
 
 .contacts {
+  overflow-y: scroll;
+  max-height: calc(100% -15vh);
 }
 
 .search-bar {
-  height: 5vh;
+  height: 6vh;
   background-color: #fafafa;
 }
 
+.fa-magnifying-glass {
+  color: #b1b1b1;
+}
+
 .contact {
-  border-bottom: 2px solid #dedede;
+  border-bottom: 1px solid #dedede;
   height: 10vh;
   display: flex;
   align-items: center;
   padding: 0 20px;
+  background-color: #fff;
 }
 
 .username {
-  height: 10vh;
+  height: 8vh;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -77,7 +87,7 @@
 
 .contact img,
 .username img {
-  width: 70px;
+  width: 15%;
   border-radius: 50%;
 }
 
@@ -89,10 +99,16 @@
 .user-icons {
   color: #b1b1b1;
   margin: 0 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .text p {
   text-decoration: underline;
   margin: 0;
+}
+
+.input-group-text,
+.form-control {
+  background-color: #fff;
+  border: none;
 }
