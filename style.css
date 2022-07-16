@@ -24,17 +24,13 @@
 
 #contacts {
   height: 100%;
-  width: calc(100% - 35vw);
+  width: calc(100% / 2);
   background-color: #eaeaea;
 }
 
 #chat {
   height: 100%;
   width: 100%;
-}
-
-.username {
-  height: 10vh;
 }
 
 .notifications {
@@ -58,12 +54,27 @@
   padding: 0 20px;
 }
 
-.contact img {
-    width: 15%;
-    border-radius: 50%;
+.username {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.contact img,
+.username img {
+  width: 70px;
+  border-radius: 50%;
 }
 
 .contact-name {
-    height: 100%;
-    padding-top: 10px;
+  height: 100%;
+  padding-top: 20px;
 }
+
+.user-icons {
+    color: #b1b1b1;
+    margin: 0 10px;
+    font-size: 2rem;
+}
+
