@@ -36,6 +36,20 @@
 .notifications {
   background-color: #8edafc;
   height: 10vh;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.fa-bell-slash {
+  border-radius: 50%;
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #8edafc;
 }
 
 .contacts {
@@ -73,8 +87,12 @@
 }
 
 .user-icons {
-    color: #b1b1b1;
-    margin: 0 10px;
-    font-size: 2rem;
+  color: #b1b1b1;
+  margin: 0 10px;
+  font-size: 2rem;
 }
 
+.text p {
+  text-decoration: underline;
+  margin: 0;
+}
