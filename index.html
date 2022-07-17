@@ -29,7 +29,10 @@
           <!-- User name -->
           <div class="username d-flex justify-content-between">
             <div class="d-flex align-items-center">
-              <img :src="'img/avatar' + user.avatar + '.jpg'" alt="" />
+              <img
+                :src="'img/avatar' + user.avatar + '.jpg'"
+                :alt="user.name"
+              />
 
               <div class="h5 ms-2">{{user.name}}</div>
             </div>
@@ -65,8 +68,11 @@
           </div>
           <div class="contacts">
             <!-- Contact -->
-            <div v-for="contact in contacts" class="contact">
-              <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="" />
+            <div v-for="(contact,index) in contacts" class="contact"  @click="viewChat(contact,index,$event)" @click="$event.target.classList.toggle('active')" >
+              <img
+                :src="'img/avatar' + contact.avatar + '.jpg'"
+                :alt="contact.name"
+              />
               <div class="contact-name h5 ms-3">{{contact.name}}</div>
             </div>
           </div>
@@ -91,38 +97,12 @@
           </div>
           <!-- Chat -->
           <div class="chat">
-            <div class="message user-msg">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Corporis vero sunt nostrum esse corrupti ut blanditiis, repellat
-                possimus obcaecati doloribus laudantium error quos laboriosam
-                sapiente, voluptatem, fugiat numquam dolore accusantium.
-              </p>
-              <p class="date">10/01/2022 13:55:20</p>
-            </div>
-            <div class="message contact-msg">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius,
-                vel?
-              </p>
-              <p class="date">10/01/2022 13:55:20</p>
-            </div>
-            <div class="message user-msg">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p class="date">10/01/2022 13:55:20</p>
-            </div>
-            <div class="message user-msg">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <p class="date">10/01/2022 13:55:20</p>
-            </div>
-            <div class="message contact-msg">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Corporis vero sunt nostrum esse corrupti ut blanditiis, repellat
-                possimus obcaecati doloribus laudantium error quos laboriosam
-                sapiente, voluptatem, fugiat numquam dolore accusantium.
-              </p>
-              <p class="date">10/01/2022 13:55:20</p>
+            <div
+              v-for="(message,index) in contacts[`${currentActive}`].messages"
+              class="message" :class="{'sent': contacts[`${currentActive}`].messages[index].status === 'sent'}"
+            >
+              <p>{{contacts[`${currentActive}`].messages[index].text}}</p>
+              <p class="date">{{contacts[`${currentActive}`].messages[index].date}}</p>
             </div>
           </div>
           <!-- Message input -->
@@ -130,6 +110,8 @@
             <i class="fa-regular fa-smile mx-4"></i>
 
             <input
+            v-model="newMsg"
+            @keyup.enter="addMessage(contacts[`${currentActive}`])"
               type="text"
               class="form-control"
               placeholder="Scrivi un messaggio"
@@ -144,3 +126,11 @@
     <script src="/app.js"></script>
   </body>
 </html>
+
+<!-- <div class="chat">
+            <div v-for="(contact,index) in contacts" class="message" >
+              <p v-for="(item, index) in contact.messages" :key="index" :class="{'sent' : item.status === 'sent'}">
+                {{item.text}} {{item.status}}
+              </p>
+              <p class="date">10/01/2022 13:55:20</p>
+            </div> -->

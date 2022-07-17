@@ -167,12 +167,12 @@ input {
   font-size: 1.1rem;
 }
 
-.user-msg {
+.sent {
   background-color: #d5f9ba;
   margin-left: 60%;
 }
 
-.contact-msg {
+.received {
   background-color: #fff;
 }
 
@@ -181,4 +181,8 @@ input {
   right: 3%;
   color: #ccc;
   font-size: 0.9rem;
+}
+
+.highlighted {
+  background-color: #009688;
 }
