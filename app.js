@@ -1,9 +1,11 @@
-const data = {};
 
 const app = new Vue({
   el: "#root",
   data: {
-    currentActive: 0,
+    currentContact: 0,
+    searchInput: "",
+    visible: false,
+
     newMsg: "",
     user: {
       name: "Salvatore",
@@ -78,7 +80,7 @@ const app = new Vue({
       },
       {
         name: "Luisa",
-        avatar: "_4",
+        avatar: "_6",
         visible: true,
         messages: [
           {
@@ -96,25 +98,55 @@ const app = new Vue({
     ],
   },
   methods: {
-    viewChat(contact, index, event) {
-      this.currentActive = index;
-      event.target.classList.add("active");
+    setCurrentContact(contact, index, event) {
+      this.currentContact = index;
+      //event.target.classList.add("active");
     },
-    addMessage(currentActive) {
-      currentActive.messages.push({
-        date: "08/08/2022 15:30:55",
-        text: this.newMsg,
-        status: "sent",
-      });
-      this.newMsg = "";
-      const sendMsg = () => {
-        currentActive.messages.push({
-          date: "08/08/2022 15:30:56",
-          text: "Ok",
-          status: "received",
-        });
+    addMessage(text, status) {
+      const newMessage = {
+        date: this.getNow,
+        text: text,
+        status: status,
       };
-      setTimeout(sendMsg, 1000);
+
+      this.contacts[this.currentContact].messages.push(newMessage);
+    },
+    sendMessage() {
+      if (!this.newMsg) return;
+
+      this.addMessage(this.newMsg, "sent");
+      this.newMsg = "";
+      this.autoReply();
+    },
+
+    autoReply() {
+      setTimeout(() => {
+        this.addMessage("Ok", "received");
+      }, 1000);
+    },
+
+    searchContact() {
+      this.filtered = this.contacts.filter((contact, i) => {
+        return contact.name.includes(this.searchInput);
+      });
+    },
+  },
+  computed: {
+    filteredContacts() {
+      return this.contacts.filter((contact) =>
+        contact.name.toLowerCase().includes(this.searchInput.toLowerCase())
+      );
+    },
+    getNow() {
+      let dateObj = new Date();
+      let month = dateObj.getMonth() + 1;
+      let day = dateObj.getDate();
+      let year = dateObj.getFullYear();
+      let hour = dateObj.getHours();
+      let min = dateObj.getMinutes();
+      let sec = dateObj.getSeconds();
+      dateObj.getSeconds() < 10 ? (sec = "0" + sec) : (sec = sec);
+      return (newdate = `${day}/${month}/${year}  ${hour}:${min}:${sec}`);
     },
   },
 });

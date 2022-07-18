@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,20 +19,18 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
+    <!-- Style -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="root">
       <div id="app" class="row">
         <!-- Contacts -->
-        <div id="side" class="col-3 p-0">
+        <div id="contacts" class="col p-0">
           <!-- User name -->
           <div class="username d-flex justify-content-between">
             <div class="d-flex align-items-center">
-              <img
-                :src="'img/avatar' + user.avatar + '.jpg'"
-                :alt="user.name"
-              />
+              <img :src="`./img/avatar${user.avatar}.jpg`" :alt="user.name" />
 
               <div class="h5 ms-2">{{user.name}}</div>
             </div>
@@ -60,6 +58,8 @@
                 ><i class="fa-solid fa-magnifying-glass"></i
               ></span>
               <input
+                v-model="searchInput"
+                @keyup.enter="searchContact()"
                 type="text"
                 class="form-control"
                 placeholder="Cerca o inizia una nuova chat"
@@ -68,24 +68,49 @@
           </div>
           <div class="contacts">
             <!-- Contact -->
-            <div v-for="(contact,index) in contacts" class="contact"  @click="viewChat(contact,index,$event)" @click="$event.target.classList.toggle('active')" >
+            <div
+              v-for="(contact,index) in filteredContacts"
+              class="contact"
+              @click="setCurrentContact(contact,index,$event)"
+              :class="{'active' : index === currentContact}"
+            >
               <img
                 :src="'img/avatar' + contact.avatar + '.jpg'"
                 :alt="contact.name"
               />
-              <div class="contact-name h5 ms-3">{{contact.name}}</div>
+              <div class="contact-name h5 ms-3 mb-3">
+                {{contact.name}}
+                <div class="d-flex flex-column mt-2">
+                  <p class=" ">
+                    Ultimo accesso{{contact.messages[contact.messages.length -
+                    1].date}}
+                  </p>
+                  <p class="">
+                    {{contact.messages[contact.messages.length - 1].text}}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <!-- Chat -->
-        <div id="main" class="col-9">
+        <div id="chat" class="col-8">
           <!-- Contact info -->
           <div class="chat-header d-flex justify-content-between">
             <div class="d-flex align-items-center">
-              <img src="/img/avatar_2.jpg" alt="" />
+              <img
+                :src="`img/avatar${contacts[currentContact].avatar}.jpg`"
+                :alt="contacts[currentContact].name"
+              />
               <div class="ms-2">
-                <div class="h5 text-dark m-0">Michele</div>
-                <p class="m-0">Ultimo accesso oggi alle</p>
+                <div class="h5 text-dark m-0">
+                  {{contacts[`${currentContact}`].name}}
+                </div>
+                <p class="m-0">
+                  Ultimo accesso
+                  {{contacts[`${currentContact}`].messages[contacts[`${currentContact}`].messages.length
+                  - 1].date}}
+                </p>
               </div>
             </div>
             <!-- Icons -->
@@ -98,11 +123,14 @@
           <!-- Chat -->
           <div class="chat">
             <div
-              v-for="(message,index) in contacts[`${currentActive}`].messages"
-              class="message" :class="{'sent': contacts[`${currentActive}`].messages[index].status === 'sent'}"
+              v-for="(message,index,$event) in contacts[`${currentContact}`].messages"
+              class="message"
+              :class="{'sent': contacts[`${currentContact}`].messages[index].status === 'sent'}"
             >
-              <p>{{contacts[`${currentActive}`].messages[index].text}}</p>
-              <p class="date">{{contacts[`${currentActive}`].messages[index].date}}</p>
+              <p>{{contacts[`${currentContact}`].messages[index].text}}</p>
+              <p class="date">
+                {{contacts[`${currentContact}`].messages[index].date}}
+              </p>
             </div>
           </div>
           <!-- Message input -->
@@ -110,8 +138,8 @@
             <i class="fa-regular fa-smile mx-4"></i>
 
             <input
-            v-model="newMsg"
-            @keyup.enter="addMessage(contacts[`${currentActive}`])"
+              v-model="newMsg"
+              @keyup.enter="sendMessage"
               type="text"
               class="form-control"
               placeholder="Scrivi un messaggio"
@@ -126,11 +154,3 @@
     <script src="/app.js"></script>
   </body>
 </html>
-
-<!-- <div class="chat">
-            <div v-for="(contact,index) in contacts" class="message" >
-              <p v-for="(item, index) in contact.messages" :key="index" :class="{'sent' : item.status === 'sent'}">
-                {{item.text}} {{item.status}}
-              </p>
-              <p class="date">10/01/2022 13:55:20</p>
-            </div> -->

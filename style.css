@@ -22,7 +22,7 @@
   margin: 0 auto;
 }
 
-#side {
+#contacts {
   display: flex;
   flex-direction: column;
   border-right: 1px solid #ccc;
@@ -30,7 +30,7 @@
   width: 25vw;
 }
 
-#main {
+#chat {
   max-height: 100%;
   background-color: #eaeaea;
   width: 55vw;
@@ -52,7 +52,7 @@ p {
 .fa-bell-slash {
   border-radius: 50%;
   background-color: #fff;
-  width: 62px;
+  width: 55px;
   height: 55px;
   line-height: 55px;
   text-align: center;
@@ -81,6 +81,12 @@ p {
   background-color: #fff;
 }
 
+.contact-name p {
+  font-size: 1rem;
+  color: #acacac;
+  margin: 2px 0;
+}
+
 .contact:hover {
   background-color: #f6f6f6;
 }
@@ -106,7 +112,7 @@ p {
 }
 
 .chat-header img {
-  width: 10%;
+  width: 9%;
   border-radius: 50%;
 }
 
@@ -172,10 +178,6 @@ input {
   margin-left: 60%;
 }
 
-.received {
-  background-color: #fff;
-}
-
 .message .date {
   position: absolute;
   right: 3%;
@@ -185,4 +187,26 @@ input {
 
 .highlighted {
   background-color: #009688;
+}
+
+.delete {
+  height: 70px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  right: 0;
+  background-color: #fff;
+  z-index: 5;
+  text-align: center;
+  width: 50%;
+  padding: 20px 10px;
+  border-radius: 5px;
+}
+
+.show {
+  display: block;
+}
+
+.active {
+  background-color: #e7e7e7;
 }
