@@ -140,7 +140,7 @@ p {
 }
 
 .chat {
-  background-image: url(/img/mine.jpg);
+  background-image: url(img/mine.jpg);
   overflow-y: scroll;
   height: calc(100% - 16vh);
   padding: 60px;
